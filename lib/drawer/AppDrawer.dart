@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'AppDrawerState.dart';
-import 'AppDrawerStateProvider.dart';
 import 'MenuItem.dart';
 
 const double menuFontSize = 16;
@@ -58,19 +56,16 @@ final List<MenuRouteItem> _menuItems = [
 class AppDrawer extends StatelessWidget {
   // final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
   final image = "";
-  final AppDrawerState state;
   final ThemeData themeData;
   final List<MenuRouteItem> menuItems;
 
   AppDrawer(
-    this.state,
     this.themeData,
     this.menuItems,
   );
 
   factory AppDrawer.standard(BuildContext context) {
-    final state = Provider.of<AppDrawerStateProvider>(context, listen: false);
-    final drawer = AppDrawer(state.state, Theme.of(context), _menuItems);
+    final drawer = AppDrawer( Theme.of(context), _menuItems);
     return drawer;
   }
 
@@ -138,14 +133,9 @@ class AppDrawer extends StatelessWidget {
   }
 
   ListTile _getListTile(BuildContext context, MenuItem menuItem, int index) {
-    final textStyle = state.selectedIndex == index
-        ? themeData.textTheme.headline6!.copyWith(
-            color: themeData.accentColor,
-            fontSize: menuFontSize,
-          )
-        : themeData.textTheme.headline6?.copyWith(fontSize: menuFontSize);
+    final textStyle =  themeData.textTheme.headline6?.copyWith(fontSize: menuFontSize);
 
-    final itemAccentColor = state.selectedIndex == index ? themeData.accentColor : null;
+    final itemAccentColor =  null;
 
     return ListTile(
       contentPadding: EdgeInsets.only(left: 16),
