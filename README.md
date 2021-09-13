@@ -1,6 +1,8 @@
 # flutter_refresh_indicator
 
-A new Flutter project.
+FlutterError (The provided ScrollController is currently attached to more than one ScrollPosition.
+The Scrollbar requires a single ScrollPosition in order to be painted.
+When the scrollbar is interactive, the associated Scrollable widgets must have unique ScrollControllers. The provided ScrollController must be unique to a Scrollable widget.)
 
 ## Getting Started
 
