@@ -1,6 +1,11 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:flutter_refresh_indicator/drawer/AppDrawer.dart';
+import 'package:flutter_refresh_indicator/drawer/AppDrawerState.dart';
+import 'package:provider/provider.dart';
+
+import 'drawer/AppDrawerStateProvider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +17,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiProvider(providers: [
+         ChangeNotifierProvider(create: (context) => AppDrawerStateProvider(AppDrawerState())),
+      
+    ],
+    child:
+     MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -27,7 +37,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+    ),);
   }
 }
 
@@ -80,6 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
+      drawer: AppDrawer.standard(context),
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
