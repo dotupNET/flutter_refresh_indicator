@@ -5,7 +5,7 @@ import 'MenuItem.dart';
 
 const double menuFontSize = 16;
 
-final List<MenuRouteItem> _menuItems = [
+final List<MenuRouteItem> menuItems = [
   MenuRouteItem(
     caption: "Home",
     icon: Icons.dashboard_outlined,
@@ -106,16 +106,11 @@ final List<MenuRouteItem> _menuItems = [
 class AppDrawer extends StatelessWidget {
   // final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
   final image = "";
-  final ThemeData themeData;
-  final List<MenuRouteItem> menuItems;
 
-  AppDrawer(
-    this.themeData,
-    this.menuItems,
-  );
+  AppDrawer();
 
   factory AppDrawer.standard(BuildContext context) {
-    final drawer = AppDrawer( Theme.of(context), _menuItems);
+    final drawer = AppDrawer();
     return drawer;
   }
 
@@ -129,7 +124,13 @@ class AppDrawer extends StatelessWidget {
             Expanded(
               child: _getContent(context),
             ),
-            _getFooter(),
+            TextButton(
+              onPressed: () {},
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text('www.dotup.de'),
+              ),
+            ),
           ],
         ),
       ),
@@ -142,27 +143,17 @@ class AppDrawer extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
-          child: _buildHeader(),
+          child: _buildHeader(context),
         ),
         ..._buildMenuList(context),
-        _buildDivider(),
+        _buildDivider(context),
       ],
     );
   }
 
-  Widget _getFooter() {
-    return TextButton(
-      onPressed: () {},
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Text('www.dotup.de'),
-      ),
-    );
-  }
-
-  Divider _buildDivider() {
+  Divider _buildDivider(BuildContext context) {
     return Divider(
-      color: themeData.dividerTheme.color,
+      color: Theme.of(context).dividerTheme.color,
       thickness: 1,
       height: 1,
     );
@@ -172,7 +163,7 @@ class AppDrawer extends StatelessWidget {
     var result = <Widget>[];
 
     for (var i = 0; i < menuItems.length; i++) {
-      result.add(_buildDivider());
+      result.add(_buildDivider(context));
       result.add(_buildMenuItem(context, menuItems[i], i));
     }
     return result;
@@ -183,9 +174,9 @@ class AppDrawer extends StatelessWidget {
   }
 
   ListTile _getListTile(BuildContext context, MenuItem menuItem, int index) {
-    final textStyle =  themeData.textTheme.headline6?.copyWith(fontSize: menuFontSize);
+    final textStyle = Theme.of(context).textTheme.headline6?.copyWith(fontSize: menuFontSize);
 
-    final itemAccentColor =  null;
+    final itemAccentColor = null;
 
     return ListTile(
       contentPadding: EdgeInsets.only(left: 16),
@@ -206,7 +197,7 @@ class AppDrawer extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(BuildContext context) {
     Text text;
     Widget subTitle;
 
@@ -218,7 +209,7 @@ class AppDrawer extends StatelessWidget {
       onPressed: () {},
       child: Text(
         'www.dotup.de',
-        style: TextStyle(color: themeData.accentColor, fontSize: 12.0),
+        style: TextStyle(color: Theme.of(context).accentColor, fontSize: 12.0),
       ),
     );
 
@@ -247,5 +238,4 @@ class AppDrawer extends StatelessWidget {
       ],
     );
   }
-
 }
