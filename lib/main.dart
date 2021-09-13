@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_refresh_indicator/drawer/AppDrawer.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
