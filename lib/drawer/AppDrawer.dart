@@ -139,6 +139,7 @@ class AppDrawer extends StatelessWidget {
 
   Widget _getContent(BuildContext context) {
     return ListView(
+      controller: ScrollController(),
       shrinkWrap: true,
       children: [
         Padding(
